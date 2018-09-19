@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="DocumentsGenerator:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/DocumentsGenerator_jar</output-path>
+    <root id="archive" name="DocumentsGenerator.jar">
+      <element id="module-output" name="DocumentsGenerator" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../libraries/jcalendar-1.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../libraries/mysql-connector-java-5.1.23-bin.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../libraries/rs2xml.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../Java Projects/itextpdf-5.5.9.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
