@@ -127,22 +127,27 @@ public class PurchaseOrderview extends JPanel {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("select * FROM purchaseorder WHERE id = "+id+"");
             while (rs.next()) {
+                purchaseOrder.setLpoNo(rs.getString("LPONo"));
                 purchaseOrder.setLpoDate(rs.getDate("LPODate"));
-                purchaseOrder.setPurchaseDescription(rs.getString("PurchaseDescription"));
+                purchaseOrder.setItemDescription(rs.getString("PurchaseDescription"));
                 purchaseOrder.setUnitOfIssue(rs.getString("unitOfIssue"));
                 purchaseOrder.setQuantity(rs.getInt("Quantity"));
                 purchaseOrder.setUnitPrice(rs.getDouble("unitPrice"));
                 purchaseOrder.setTotalPrice(rs.getDouble("totalcost"));
                 purchaseOrder.setPl4(rs.getString("pl4"));
-                purchaseOrder.setRequestBy(rs.getString("requestby"));
                 purchaseOrder.setVehicleNo(rs.getString("vehicleNo"));
                 purchaseOrder.setDepartment(rs.getString("department"));
-                purchaseOrder.setLpoNo(rs.getString("LPONo"));
                 purchaseOrder.setAuthorisedBy(rs.getString("authorisedBy"));
                 purchaseOrder.setProcumentMethod(rs.getString("procumentMethod"));
+                purchaseOrder.setProcumentMethod(rs.getString("procumentReference"));
                 purchaseOrder.setSupplier(rs.getString("supplier"));
                 purchaseOrder.setInvoiceNo(rs.getString("invoiceNo"));
-                purchaseOrder.setQteNO(rs.getString("Q"));
+                purchaseOrder.setInvoiceNo(rs.getString("invoiceDate"));
+                purchaseOrder.setInvoiceNo(rs.getString("invoiceAmount"));
+                purchaseOrder.setGRN_NO(rs.getString("schemeApplied"));
+                purchaseOrder.setGRN_NO(rs.getString("schemeRegNo"));
+                purchaseOrder.setGRN_NO(rs.getString("DeliveryNoteNo"));
+                purchaseOrder.setGRN_NO(rs.getString("Status"));
             }
 
         } catch (SQLException ex) {

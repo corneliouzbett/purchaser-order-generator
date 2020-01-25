@@ -12,7 +12,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.Vector;
 
 /**
@@ -33,8 +32,8 @@ public class PurchaseOrderDao {
             Connection conn = MysqlConnection.connect();
             Statement stmt = conn.createStatement();
             try (ResultSet rs = stmt.executeQuery("select id, LPONo, LPODate,purchaseDescription,Quantity "
-                    + ",unitPrice,totalcost,requestBy,"
-                    + "vehicleNo,department,authorisedBy,supplier,procumentMethod FROM purchaseOrder;")) {
+                    + ",unitPrice,totalcost, invoiceNo, invoiceDate, invoiceAmount, schemeRegNo, schemeApplied,"
+                    + "vehicleNo,department,authorisedBy,supplier,procumentMethod,procumentReference, DeliveryNoteNo, Status FROM purchaseOrder;")) {
                 table = new JTable(buildTableModel(rs));
                 table.setRowHeight(30);
                 table.setBackground(Color.WHITE);
@@ -93,16 +92,16 @@ public class PurchaseOrderDao {
         try
         {
             Connection connection = MysqlConnection.connect() ;
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO  purchaseorder VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO  purchaseorder VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             preparedStatement.setInt(1, 0);
             preparedStatement.setDate(2, purchaseOrder.getLpoDate());
-            preparedStatement.setString(3, purchaseOrder.getPurchaseDescription());
+            preparedStatement.setString(3, purchaseOrder.getItemDescription());
             preparedStatement.setString(4, purchaseOrder.getUnitOfIssue());
             preparedStatement.setInt(5, purchaseOrder.getQuantity());
             preparedStatement.setDouble(6, purchaseOrder.getUnitPrice());
             preparedStatement.setDouble(7, purchaseOrder.getTotalPrice());
             preparedStatement.setString(8, purchaseOrder.getPl4());
-            preparedStatement.setString(9, purchaseOrder.getRequestBy());
+            preparedStatement.setString(9, purchaseOrder.getProcumentReference());
             preparedStatement.setString(10, purchaseOrder.getVehicleNo());
             preparedStatement.setString(11, purchaseOrder.getDepartment());
             preparedStatement.setString(12, purchaseOrder.getLpoNo());
@@ -110,7 +109,13 @@ public class PurchaseOrderDao {
             preparedStatement.setString(14, purchaseOrder.getProcumentMethod());
             preparedStatement.setString(15, purchaseOrder.getSupplier());
             preparedStatement.setString(16, purchaseOrder.getInvoiceNo());
-            preparedStatement.setString(17, purchaseOrder.getQteNO());
+            preparedStatement.setString(17, purchaseOrder.getGRN_NO());
+            preparedStatement.setDate(18, purchaseOrder.getInvoiceDate());
+            preparedStatement.setString(19, purchaseOrder.getInvoiceAmount());
+            preparedStatement.setString(20, purchaseOrder.getSchemeApplied());
+            preparedStatement.setString(21, purchaseOrder.getSchemeRegNo());
+            preparedStatement.setString(22, purchaseOrder.getDeliveryNoteNo());
+            preparedStatement.setString(23, purchaseOrder.getStatus());
             preparedStatement.execute();
             JOptionPane.showMessageDialog(null, "Purchase Order Added Successfully", "Belisco Softwares Message Service", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
@@ -160,7 +165,7 @@ public class PurchaseOrderDao {
                     + "SET PurchaseDescription = ? , unitOfIssue= ?,"
                     + " Quantity = ?, unitPrice = ?, totalcost = ?, pl4 = ?,"
                     + " requestby = ?, vehicleNo = ?, department = ?,  LPONo = ?, authorisedBy = ?, procumentMethod = ?, supplier = ? , invoiceNo = ?, Q = ?, LPODate = ? WHERE id = ? ;");
-            preparedStatement.setString(1, purchaseOrder.getPurchaseDescription());
+            preparedStatement.setString(1, purchaseOrder.getItemDescription());
             preparedStatement.setString(2, purchaseOrder.getUnitOfIssue());
             preparedStatement.setInt(3, purchaseOrder.getQuantity());
             preparedStatement.setDouble(4, purchaseOrder.getUnitPrice());
@@ -174,7 +179,7 @@ public class PurchaseOrderDao {
             preparedStatement.setString(12, purchaseOrder.getProcumentMethod());
             preparedStatement.setString(13, purchaseOrder.getSupplier());
             preparedStatement.setString(14, purchaseOrder.getInvoiceNo());
-            preparedStatement.setString(15, purchaseOrder.getQteNO());
+            preparedStatement.setString(15, purchaseOrder.getGRN_NO());
             preparedStatement.setDate(16, purchaseOrder.getLpoDate());
             preparedStatement.setInt(17, id);
             preparedStatement.execute();

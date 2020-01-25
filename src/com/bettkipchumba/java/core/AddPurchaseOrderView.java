@@ -13,20 +13,22 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
 public class AddPurchaseOrderView extends JPanel {
     private static JPanel userView, userViewPanel;
     private static JLabel menubarLabel;
-    private static JLabel lpoDateLabel, purchaseDescLabel,unitofissueLabel,quantitylabel,unitCostlabel,pl4label,requestbylabel,
+    private static JLabel lpoDateLabel, purchaseDescLabel,unitofissueLabel,quantitylabel,unitCostlabel,pl4label,
     vehiclenoLabel,departmentlabel,lponolabel,authorisedbylabel,procumentmethod,supplierlabel,invoicenolabel;
-    private static JTextField  purchaseDescTextArea,unitofissue,quantity,unitcost,pl4,requestedby,vehicleno,lpono,authoriseby,invoiceno;
+    private static JTextField  purchaseDescTextArea,unitofissue,quantity,unitcost,pl4,vehicleno,lpono,authoriseby,invoiceno;
     private static JComboBox departmentcombo,procumentMethodcombo, suppliercombo;
 
+    private static JLabel DeliveryNoteNoLabel, StatusLabel, invoiceDateLabel, invoiceAmountLabel, schemeAppliedLabel, schemeRegNoLabel,procumentReferenceLabel;
+    private static JTextField DeliveryNoteNo, Status, invoiceAmount, schemeApplied, schemeRegNo,procumentReference;
+
     private static JButton backButton, submitButton;
-    private static JDateChooser lpoDateField;
+    private static JDateChooser lpoDateField, invoiceDate;
 
     String [] procumentMethods = {"Quotation","Contract","Profoma","Cash purchase","Tender"};
 
@@ -38,7 +40,7 @@ public class AddPurchaseOrderView extends JPanel {
 
         userViewPanel = new JPanel();
         userViewPanel.setBackground(Color.WHITE);
-        userViewPanel.setBounds(50, 30, 950, 600);
+        userViewPanel.setBounds(50, 30, 970, 600);
         userViewPanel.setBorder(new LineBorder(Color.decode("#1e90ff")));
         userViewPanel.setLayout(null);
 
@@ -96,12 +98,12 @@ public class AddPurchaseOrderView extends JPanel {
         pl4.setBounds(230,330,200,30);
         userViewPanel.add(pl4);
 
-        requestbylabel = new JLabel("Request By");
-        requestbylabel.setBounds(20,380,200,20);
-        userViewPanel.add(requestbylabel);
-        requestedby = new JTextField();
-        requestedby.setBounds(230,380,200,30);
-        userViewPanel.add(requestedby);
+        procumentReferenceLabel = new JLabel("Procument Reference");
+        procumentReferenceLabel.setBounds(20,380,200,20);
+        userViewPanel.add(procumentReferenceLabel);
+        procumentReference = new JTextField();
+        procumentReference.setBounds(230,380,200,30);
+        userViewPanel.add(procumentReference);
 
         vehiclenoLabel = new JLabel("Vehicle No");
         vehiclenoLabel.setBounds(20,430,200,20);
@@ -109,6 +111,20 @@ public class AddPurchaseOrderView extends JPanel {
         vehicleno = new JTextField();
         vehicleno.setBounds(230,430,200,30);
         userViewPanel.add(vehicleno);
+
+        DeliveryNoteNoLabel = new JLabel("DeliveryNote No");
+        DeliveryNoteNoLabel.setBounds(20,480,200,20);
+        userViewPanel.add(DeliveryNoteNoLabel);
+        DeliveryNoteNo = new JTextField();
+        DeliveryNoteNo.setBounds(230,480,200,30);
+        userViewPanel.add(DeliveryNoteNo);
+
+        StatusLabel = new JLabel("Status");
+        StatusLabel.setBounds(20,530,200,20);
+        userViewPanel.add(StatusLabel);
+        Status = new JTextField();
+        Status.setBounds(230,530,200,30);
+        userViewPanel.add(Status);
 
         departmentlabel = new JLabel("Department");
         departmentlabel.setBounds(500,70,150,20);
@@ -151,19 +167,49 @@ public class AddPurchaseOrderView extends JPanel {
         invoiceno = new JTextField();
         invoiceno.setBounds(630,330,200,30);
         userViewPanel.add(invoiceno);
+
+        schemeAppliedLabel = new JLabel("SchemeApplied");
+        schemeAppliedLabel.setBounds(500,380,200,20);
+        userViewPanel.add(schemeAppliedLabel);
+        schemeApplied = new JTextField();
+        schemeApplied.setBounds(630,380,200,30);
+        userViewPanel.add(schemeApplied);
+
+        schemeRegNoLabel = new JLabel("Scheme RegNo");
+        schemeRegNoLabel.setBounds(500,430,200,20);
+        userViewPanel.add(schemeRegNoLabel);
+        schemeRegNo = new JTextField();
+        schemeRegNo.setBounds(630,430,200,30);
+        userViewPanel.add(schemeRegNo);
+
+        invoiceDateLabel = new JLabel("Invoice Date");
+        invoiceDateLabel.setBounds(500,480,200,20);
+        userViewPanel.add(invoiceDateLabel);
+        invoiceDate = new JDateChooser();
+        invoiceDate.setBounds(630,480,200,30);
+        userViewPanel.add(invoiceDate);
+
+        invoiceAmountLabel = new JLabel("Invoice Amount");
+        invoiceAmountLabel.setBounds(500,530,200,20);
+        userViewPanel.add(invoiceAmountLabel);
+        invoiceAmount = new JTextField();
+        invoiceAmount.setBounds(630,530,200,30);
+        userViewPanel.add(invoiceAmount);
+
+
         BindDepartmentComboBox();
         BindSupplierComboBox();
 
         backButton = new JButton("BACK");
-        backButton.setBounds(450, 530, 100, 30);
-        backButton.setBackground(Color.decode("#2E86C1"));
-        backButton.setForeground(Color.WHITE);
+        backButton.setBounds(450, 600, 100, 30);
+        //backButton.setBackground(Color.decode("#2E86C1"));
+        //backButton.setForeground(Color.WHITE);
         backButton.setBorder(new LineBorder(Color.decode("#2E86C1"),2,true));
         add(backButton);
         submitButton = new JButton("SUBMIT");
-        submitButton.setBounds(580, 530, 100, 30);
-        submitButton.setBackground(Color.decode("#2E86C1"));
-        submitButton.setForeground(Color.WHITE);
+        submitButton.setBounds(580, 600, 100, 30);
+        //submitButton.setBackground(Color.decode("#2E86C1"));
+        //submitButton.setForeground(Color.WHITE);
         submitButton.setBorder(new LineBorder(Color.decode("#2E86C1"),2,true));
 
         backButton.addActionListener(new ActionListener() {
@@ -191,17 +237,18 @@ public class AddPurchaseOrderView extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if ( !purchaseDescTextArea.getText().isEmpty() && !authoriseby.getText().isEmpty() &&
-                        !lpono.getText().isEmpty() && !vehicleno.getText().isEmpty() && !requestedby.getText().isEmpty() && !pl4.getText().isEmpty()
-                        && !unitcost.getText().isEmpty() && !quantity.getText().isEmpty() && !unitofissue.getText().isEmpty()){
+                        !lpono.getText().isEmpty() && !vehicleno.getText().isEmpty() && !procumentReference.getText().isEmpty() && !pl4.getText().isEmpty()
+                        && !unitcost.getText().isEmpty() && !quantity.getText().isEmpty() && !unitofissue.getText().isEmpty()
+                && !DeliveryNoteNo.getText().isEmpty() && !Status.getText().isEmpty() && !invoiceAmount.getText().isEmpty()){
                     PurchaseOrder purchaseOrder = new PurchaseOrder();
                     purchaseOrder.setLpoDate(new Date(lpoDateField.getDate().getTime()));
-                    purchaseOrder.setPurchaseDescription(purchaseDescTextArea.getText());
+                    purchaseOrder.setItemDescription(purchaseDescTextArea.getText());
                     purchaseOrder.setUnitOfIssue(unitofissue.getText());
                     purchaseOrder.setQuantity(Integer.parseInt(quantity.getText()));
                     purchaseOrder.setUnitPrice(Double.parseDouble(unitcost.getText()));
                     purchaseOrder.setTotalPrice(Double.parseDouble(unitcost.getText()) * Double.parseDouble(quantity.getText()));
                     purchaseOrder.setPl4(pl4.getText());
-                    purchaseOrder.setRequestBy(requestedby.getText());
+                    purchaseOrder.setProcumentReference(procumentReference.getText());
                     purchaseOrder.setVehicleNo(vehicleno.getText());
                     purchaseOrder.setDepartment(departmentcombo.getSelectedItem().toString());
                     purchaseOrder.setLpoNo(lpono.getText());
@@ -209,7 +256,13 @@ public class AddPurchaseOrderView extends JPanel {
                     purchaseOrder.setProcumentMethod(procumentMethodcombo.getSelectedItem().toString());
                     purchaseOrder.setSupplier(suppliercombo.getSelectedItem().toString());
                     purchaseOrder.setInvoiceNo(invoiceno.getText());
-                    purchaseOrder.setQteNO("");
+                    purchaseOrder.setInvoiceDate(new Date(lpoDateField.getDate().getTime()));
+                    purchaseOrder.setInvoiceAmount(invoiceAmount.getText());
+                    purchaseOrder.setDeliveryNoteNo(DeliveryNoteNo.getText());
+                    purchaseOrder.setStatus(Status.getText());
+                    purchaseOrder.setSchemeApplied(schemeApplied.getText());
+                    purchaseOrder.setSchemeRegNo(schemeRegNo.getText());
+                    purchaseOrder.setGRN_NO("");
                     PurchaseOrderDao.addPurchaseOrder(purchaseOrder);
                 } else {
                     validateView();
@@ -221,9 +274,11 @@ public class AddPurchaseOrderView extends JPanel {
         add(submitButton);
 
 
-        java.util.List<JTextField> fields = Arrays.asList(purchaseDescTextArea, unitofissue,quantity,unitcost,pl4,requestedby,vehicleno,lpono,authoriseby,invoiceno);
-        List<JLabel> labels = Arrays.asList(lpoDateLabel, purchaseDescLabel,unitofissueLabel,quantitylabel,unitCostlabel,pl4label,requestbylabel,
-                vehiclenoLabel,departmentlabel,lponolabel,authorisedbylabel,procumentmethod,supplierlabel,invoicenolabel);
+        java.util.List<JTextField> fields = Arrays.asList(purchaseDescTextArea, unitofissue,quantity,unitcost,pl4,vehicleno,lpono,authoriseby,invoiceno,
+                DeliveryNoteNo, Status, invoiceAmount, schemeApplied, schemeRegNo,procumentReference);
+        List<JLabel> labels = Arrays.asList(lpoDateLabel, purchaseDescLabel,unitofissueLabel,quantitylabel,unitCostlabel,pl4label,
+                vehiclenoLabel,departmentlabel,lponolabel,authorisedbylabel,procumentmethod,supplierlabel,invoicenolabel,
+                DeliveryNoteNoLabel, StatusLabel, invoiceDateLabel, invoiceAmountLabel, schemeAppliedLabel, schemeRegNoLabel,procumentReferenceLabel);
         TextFieldsPropertiesApi.JTextfieldsProperties(fields);
         LabelPropertiesApi.labelsDeclaration(labels);
 
@@ -250,10 +305,7 @@ public class AddPurchaseOrderView extends JPanel {
         } else if (pl4.getText().isEmpty()){
             pl4.setBorder(new LineBorder(Color.RED));
             isValid = false;
-        } else if (requestedby.getText().isEmpty()){
-            requestedby.setBorder(new LineBorder(Color.RED));
-            isValid = false;
-        } else if (vehicleno.getText().isEmpty()){
+        }  else if (vehicleno.getText().isEmpty()){
             vehicleno.setBorder(new LineBorder(Color.RED));
             isValid = false;
         } else if (lpono.getText().isEmpty()){

@@ -13,7 +13,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -65,7 +64,7 @@ public class EditPurchaseOrderView extends JPanel {
         userViewPanel.add(purchaseDescLabel);
         purchaseDescTextArea = new JTextField();
         purchaseDescTextArea.setBounds(230,120,200,40);
-        purchaseDescTextArea.setText(purchaseOrder.getPurchaseDescription());
+        purchaseDescTextArea.setText(purchaseOrder.getItemDescription());
         userViewPanel.add(purchaseDescTextArea);
 
         unitofissueLabel = new JLabel("Unit of Issue");
@@ -204,7 +203,7 @@ public class EditPurchaseOrderView extends JPanel {
                         && !unitcost.getText().isEmpty() && !quantity.getText().isEmpty() && !unitofissue.getText().isEmpty()){
                     PurchaseOrder purchaseOrder = new PurchaseOrder();
                     purchaseOrder.setLpoDate(new Date(lpoDateField.getDate().getTime()));
-                    purchaseOrder.setPurchaseDescription(purchaseDescTextArea.getText());
+                    purchaseOrder.setItemDescription(purchaseDescTextArea.getText());
                     purchaseOrder.setUnitOfIssue(unitofissue.getText());
                     purchaseOrder.setQuantity(Integer.parseInt(quantity.getText()));
                     purchaseOrder.setUnitPrice(Double.parseDouble(unitcost.getText()));
@@ -218,7 +217,7 @@ public class EditPurchaseOrderView extends JPanel {
                     purchaseOrder.setProcumentMethod(procumentMethodcombo.getSelectedItem().toString());
                     purchaseOrder.setSupplier(suppliercombo.getSelectedItem().toString());
                     purchaseOrder.setInvoiceNo(invoiceno.getText());
-                    purchaseOrder.setQteNO("");
+                    purchaseOrder.setGRN_NO("");
                     PurchaseOrderDao.updatePurchaseOrder(purchaseOrder,Integer.parseInt(PurchaseOrderDao.GetTablePrimaryKey()));
                 } else {
                     validateView();

@@ -136,7 +136,7 @@ public class MainSkeleton extends JFrame {
                     menu.addMouseListener(new MouseListener() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
-                            //menu.setBackground(Color.decode("#154360"));
+                            menu.setBackground(Color.decode("#154360"));
                         }
 
                         @Override

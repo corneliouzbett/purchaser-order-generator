@@ -73,7 +73,7 @@ CREATE TABLE `purchaseorder` (
   `unitPrice` double NOT NULL,
   `totalcost` double NOT NULL,
   `pl4` varchar(256) NOT NULL,
-  `requestby` varchar(256) NOT NULL,
+  `procumentReference` varchar(256) NOT NULL,
   `vehicleNo` varchar(256) NOT NULL,
   `department` varchar(256) NOT NULL,
   `LPONo` varchar(256) NOT NULL,
@@ -81,7 +81,13 @@ CREATE TABLE `purchaseorder` (
   `procumentMethod` varchar(256) NOT NULL,
   `supplier` varchar(256) NOT NULL,
   `invoiceNo` varchar(256) NOT NULL,
-  `Q` varchar(256) NOT NULL
+  `Q` varchar(256) NOT NULL,
+  `invoiceDate` date,
+  `invoiceAmount` varchar(256) NOT NULL,
+  `schemeApplied` varchar(256) NOT NULL,
+  `schemeRegNo` varchar(256) NOT NULL,
+  `DeliveryNoteNo` varchar(256) NOT NULL,
+  `Status` varchar(256) NOT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

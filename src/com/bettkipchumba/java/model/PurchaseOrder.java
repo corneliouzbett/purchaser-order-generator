@@ -3,8 +3,9 @@ package com.bettkipchumba.java.model;
 import java.sql.Date;
 
 public class PurchaseOrder {
+    String lpoNo;
     Date lpoDate;
-    String purchaseDescription;
+    String ItemDescription;
     String unitOfIssue;
     int quantity;
     double unitPrice;
@@ -13,19 +14,31 @@ public class PurchaseOrder {
     String requestBy;
     String vehicleNo;
     String department;
-    String lpoNo;
     String authorisedBy;
     String procumentMethod;
+    String procumentReference;
     String supplier;
+    String schemeApplied;
+    String schemeRegNo;
     String invoiceNo;
-    String qteNO;
+    Date invoiceDate;
+    String invoiceAmount;
+    String GRN_NO;
+    String DeliveryNoteNo;
+    String Status;
 
-    public PurchaseOrder(Date lpoDate, String purchaseDescription, String unitOfIssue, int quantity,
-                         double unitPrice, double totalPrice, String pl4, String requestBy,
-                         String vehicleNo, String department, String lpoNo, String authorisedBy,
-                         String procumentMethod, String supplier, String invoiceNo, String qteNO) {
+    public PurchaseOrder() {
+    }
+
+    public PurchaseOrder(String lpoNo, Date lpoDate, String itemDescription, String unitOfIssue, int quantity,
+            double unitPrice,
+            double totalPrice, String pl4, String requestBy, String vehicleNo, String department, String authorisedBy,
+            String procumentMethod, String procumentReference, String supplier, String schemeApplied,
+            String schemeRegNo, String invoiceNo, Date invoiceDate, String invoiceAmount, String GRN_NO,
+            String deliveryNoteNo, String status) {
+        this.lpoNo = lpoNo;
         this.lpoDate = lpoDate;
-        this.purchaseDescription = purchaseDescription;
+        ItemDescription = itemDescription;
         this.unitOfIssue = unitOfIssue;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
@@ -34,15 +47,26 @@ public class PurchaseOrder {
         this.requestBy = requestBy;
         this.vehicleNo = vehicleNo;
         this.department = department;
-        this.lpoNo = lpoNo;
         this.authorisedBy = authorisedBy;
         this.procumentMethod = procumentMethod;
+        this.procumentReference = procumentReference;
         this.supplier = supplier;
+        this.schemeApplied = schemeApplied;
+        this.schemeRegNo = schemeRegNo;
         this.invoiceNo = invoiceNo;
-        this.qteNO = qteNO;
+        this.invoiceDate = invoiceDate;
+        this.invoiceAmount = invoiceAmount;
+        this.GRN_NO = GRN_NO;
+        DeliveryNoteNo = deliveryNoteNo;
+        Status = status;
     }
 
-    public PurchaseOrder() {
+    public String getLpoNo() {
+        return lpoNo;
+    }
+
+    public void setLpoNo(String lpoNo) {
+        this.lpoNo = lpoNo;
     }
 
     public Date getLpoDate() {
@@ -53,12 +77,12 @@ public class PurchaseOrder {
         this.lpoDate = lpoDate;
     }
 
-    public String getPurchaseDescription() {
-        return purchaseDescription;
+    public String getItemDescription() {
+        return ItemDescription;
     }
 
-    public void setPurchaseDescription(String purchaseDescription) {
-        this.purchaseDescription = purchaseDescription;
+    public void setItemDescription(String itemDescription) {
+        ItemDescription = itemDescription;
     }
 
     public String getUnitOfIssue() {
@@ -125,14 +149,6 @@ public class PurchaseOrder {
         this.department = department;
     }
 
-    public String getLpoNo() {
-        return lpoNo;
-    }
-
-    public void setLpoNo(String lpoNo) {
-        this.lpoNo = lpoNo;
-    }
-
     public String getAuthorisedBy() {
         return authorisedBy;
     }
@@ -149,12 +165,36 @@ public class PurchaseOrder {
         this.procumentMethod = procumentMethod;
     }
 
+    public String getProcumentReference() {
+        return procumentReference;
+    }
+
+    public void setProcumentReference(String procumentReference) {
+        this.procumentReference = procumentReference;
+    }
+
     public String getSupplier() {
         return supplier;
     }
 
     public void setSupplier(String supplier) {
         this.supplier = supplier;
+    }
+
+    public String getSchemeApplied() {
+        return schemeApplied;
+    }
+
+    public void setSchemeApplied(String schemeApplied) {
+        this.schemeApplied = schemeApplied;
+    }
+
+    public String getSchemeRegNo() {
+        return schemeRegNo;
+    }
+
+    public void setSchemeRegNo(String schemeRegNo) {
+        this.schemeRegNo = schemeRegNo;
     }
 
     public String getInvoiceNo() {
@@ -165,19 +205,52 @@ public class PurchaseOrder {
         this.invoiceNo = invoiceNo;
     }
 
-    public String getQteNO() {
-        return qteNO;
+    public Date getInvoiceDate() {
+        return invoiceDate;
     }
 
-    public void setQteNO(String qteNO) {
-        this.qteNO = qteNO;
+    public void setInvoiceDate(Date invoiceDate) {
+        this.invoiceDate = invoiceDate;
+    }
+
+    public String getInvoiceAmount() {
+        return invoiceAmount;
+    }
+
+    public void setInvoiceAmount(String invoiceAmount) {
+        this.invoiceAmount = invoiceAmount;
+    }
+
+    public String getGRN_NO() {
+        return GRN_NO;
+    }
+
+    public void setGRN_NO(String GRN_NO) {
+        this.GRN_NO = GRN_NO;
+    }
+
+    public String getDeliveryNoteNo() {
+        return DeliveryNoteNo;
+    }
+
+    public void setDeliveryNoteNo(String deliveryNoteNo) {
+        DeliveryNoteNo = deliveryNoteNo;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
     }
 
     @Override
     public String toString() {
         return "PurchaseOrder{" +
-                "lpoDate='" + lpoDate + '\'' +
-                ", purchaseDescription='" + purchaseDescription + '\'' +
+                "lpoNo='" + lpoNo + '\'' +
+                ", lpoDate=" + lpoDate +
+                ", ItemDescription='" + ItemDescription + '\'' +
                 ", unitOfIssue='" + unitOfIssue + '\'' +
                 ", quantity=" + quantity +
                 ", unitPrice=" + unitPrice +
@@ -186,12 +259,18 @@ public class PurchaseOrder {
                 ", requestBy='" + requestBy + '\'' +
                 ", vehicleNo='" + vehicleNo + '\'' +
                 ", department='" + department + '\'' +
-                ", lpoNo='" + lpoNo + '\'' +
                 ", authorisedBy='" + authorisedBy + '\'' +
                 ", procumentMethod='" + procumentMethod + '\'' +
+                ", procumentReference='" + procumentReference + '\'' +
                 ", supplier='" + supplier + '\'' +
+                ", schemeApplied='" + schemeApplied + '\'' +
+                ", schemeRegNo='" + schemeRegNo + '\'' +
                 ", invoiceNo='" + invoiceNo + '\'' +
-                ", qteNO='" + qteNO + '\'' +
+                ", invoiceDate='" + invoiceDate + '\'' +
+                ", invoiceAmount='" + invoiceAmount + '\'' +
+                ", GRN_NO='" + GRN_NO + '\'' +
+                ", DeliveryNoteNo='" + DeliveryNoteNo + '\'' +
+                ", Status='" + Status + '\'' +
                 '}';
     }
 }

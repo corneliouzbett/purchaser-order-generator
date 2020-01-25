@@ -16,7 +16,7 @@ public class TableBuilder {
     public static PdfPTable createTable(Date start, Date to) throws DocumentException {
 
         // create 6 column table
-        PdfPTable table = new PdfPTable(16);
+        PdfPTable table = new PdfPTable(22);
 
         // set the width of the table to 100% of page
         table.setWidthPercentage(100);
@@ -26,11 +26,11 @@ public class TableBuilder {
 
         // ----------------Table Header "Title"----------------
         // font
-        Font font = new Font(FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.BLACK);
+        Font font = new Font(FontFamily.TIMES_ROMAN, 10, Font.BOLD, BaseColor.BLACK);
         // create header cell
         PdfPCell cell = new PdfPCell(new Phrase("REPORT PURCHASE FOR THE MONTH OF SEPT",font));
         // set Column span "1 cell = 6 cells width"
-        cell.setColspan(16);
+        cell.setColspan(22);
         // set style
         Style.headerCellStyle(cell);
         // add to table
@@ -40,20 +40,26 @@ public class TableBuilder {
 
         // Table header
         table.addCell(createValueCell("LPODate"));
-        table.addCell(createValueCell("Purchase Description"));
-        table.addCell(createValueCell("UnitOfIssue"));
-        table.addCell(createValueCell("Quantity"));
-        table.addCell(createValueCell("Unit Price"));
-        table.addCell(createValueCell("Total cost"));
-        table.addCell(createValueCell("Pl4 A"));
-        table.addCell(createValueCell("RequestBy"));
+        table.addCell(createValueCell("item desc"));
+        table.addCell(createValueCell("unit of issue"));
+        table.addCell(createValueCell("qty"));
+        table.addCell(createValueCell("unit price"));
+        table.addCell(createValueCell("total cost"));
+        table.addCell(createValueCell("Pl4"));
+        table.addCell(createValueCell("proc Ref"));
         table.addCell(createValueCell("vehicleNo"));
-        table.addCell(createValueCell("Department"));
+        table.addCell(createValueCell("dpt"));
         table.addCell(createValueCell("LpoNo"));
         table.addCell(createValueCell("Authorisedby"));
-        table.addCell(createValueCell("Procument method"));
-        table.addCell(createValueCell("Supplier"));
-        table.addCell(createValueCell("InvoiceNo"));
+        table.addCell(createValueCell("proc method"));
+        table.addCell(createValueCell("supplier"));
+        table.addCell(createValueCell("invoice no"));
+        table.addCell(createValueCell("invoice date"));
+        table.addCell(createValueCell("invoice amount"));
+        table.addCell(createValueCell("scheme applied"));
+        table.addCell(createValueCell("scheme no"));
+        table.addCell(createValueCell("delivery noteNo"));
+        table.addCell(createValueCell("status"));
         table.addCell(createValueCell("Quote"));
 
         Connection conn;
@@ -69,7 +75,7 @@ public class TableBuilder {
                 table.addCell(createLabelCell(rs.getString("unitPrice")));
                 table.addCell(createLabelCell(rs.getString("totalcost")));
                 table.addCell(createLabelCell(rs.getString("pl4")));
-                table.addCell(createLabelCell(rs.getString("requestby")));
+                table.addCell(createLabelCell(rs.getString("procumentReference")));
                 table.addCell(createLabelCell(rs.getString("vehicleNo")));
                 table.addCell(createLabelCell(rs.getString("department")));
                 table.addCell(createLabelCell(rs.getString("LPONo")));
@@ -77,6 +83,12 @@ public class TableBuilder {
                 table.addCell(createLabelCell(rs.getString("procumentMethod")));
                 table.addCell(createLabelCell(rs.getString("supplier")));
                 table.addCell(createLabelCell(rs.getString("invoiceNo")));
+                table.addCell(createLabelCell(rs.getString("invoiceDate")));
+                table.addCell(createLabelCell(rs.getString("invoiceAmount")));
+                table.addCell(createLabelCell(rs.getString("schemeRegNo")));
+                table.addCell(createLabelCell(rs.getString("schemeApplied")));
+                table.addCell(createLabelCell(rs.getString("DeliveryNoteNo")));
+                table.addCell(createLabelCell(rs.getString("Status")));
                 table.addCell(createLabelCell(rs.getString("Q")));
             }
 
@@ -91,7 +103,7 @@ public class TableBuilder {
     // create cells
     private static PdfPCell createLabelCell(String text){
         // font
-        Font font = new Font(FontFamily.HELVETICA, 8, Font.BOLD, BaseColor.DARK_GRAY);
+        Font font = new Font(FontFamily.TIMES_ROMAN, 7, Font.BOLD, BaseColor.DARK_GRAY);
 
         // create cell
         PdfPCell cell = new PdfPCell(new Phrase(text,font));
@@ -104,7 +116,7 @@ public class TableBuilder {
     // create cells
     private static PdfPCell createValueCell(String text){
         // font
-        Font font = new Font(FontFamily.TIMES_ROMAN, 8, Font.NORMAL, BaseColor.BLACK);
+        Font font = new Font(FontFamily.TIMES_ROMAN, 7, Font.NORMAL, BaseColor.BLACK);
 
         // create cell
         PdfPCell cell = new PdfPCell(new Phrase(text,font));
