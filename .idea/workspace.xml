@@ -66,12 +66,6 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="10" />
-    <option name="y" value="25" />
-    <option name="width" value="1346" />
-    <option name="height" value="728" />
-  </component>
   <component name="ProjectId" id="1WbJ9838qcvBwvq0LhrrGdsLXbx" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />

@@ -87,23 +87,9 @@ CREATE TABLE `purchaseorder` (
   `schemeApplied` varchar(256) NOT NULL,
   `schemeRegNo` varchar(256) NOT NULL,
   `DeliveryNoteNo` varchar(256) NOT NULL,
-  `Status` varchar(256) NOT NULL,
+  `Status` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `purchaseorder`
---
-
-INSERT INTO `purchaseorder` (`id`, `LPODate`, `PurchaseDescription`, `unitOfIssue`, `Quantity`, `unitPrice`, `totalcost`, `pl4`, `requestby`, `vehicleNo`, `department`, `LPONo`, `authorisedBy`, `procumentMethod`, `supplier`, `invoiceNo`, `Q`) VALUES
-(2, '1969-12-31', 'Oil Filter', 'pcs', 3, 1000, 3000, '616826', 'D. kimaru', 'SERVICE', 'Tourism', '110091', 'MURAYA', 'Quotation', 'Admiral trading co. ltd', 'INV-230009', ''),
-(3, '1969-12-31', 'Diesel', 'lts', 5000, 114.56, 572800, '500410', 'J. THUO', 'ASSORTED', 'Tourism', '110098', 'J.Wandeto', 'Profoma', 'National oil corporation', 'INV-00834', ''),
-(4, '1969-12-31', 'Petrol', 'lts', 5000, 114.56, 572800, '500410', 'J. THUO', 'Service', 'Rhino', '110098', 'J.Wandeto', 'Profoma', 'starbell agencies', 'INV-00834', ''),
-(5, '1969-12-31', 'Barbed Wire', 'pcs', 5, 4000, 20000, '500417', 'MURANYA', 'Service', 'Fence', '110099', 'J.Wandeto', 'Profoma', 'starbell agencies', 'INV-00834', ''),
-(6, '2018-09-08', 'Barbed Wire', 'pcs', 5, 4000, 20000, '500417', 'MURANYA', 'Service', 'Tourism', '110099', 'J.Wandeto', 'Quotation', 'Admiral trading co. ltd', 'INV-00834', ''),
-(7, '1969-12-31', 'Barbed Wire', 'pcs', 5, 4000, 20000, '500417', 'MURANYA', 'Service', 'Tourism', '110099', 'J.Wandeto', 'Quotation', 'Admiral trading co. ltd', 'INV-00834', ''),
-(8, '1969-12-31', 'TestData', 'pcs', 5, 4000, 20000, '500417', 'MURANYA', 'Service', 'AD', '110099', 'J.Wandeto', 'Quotation', 'Dapny limited', 'INV-00834', ''),
-(9, '1969-12-31', 'TestData', 'pcs', 5, 4000, 20000, '500417', 'MURANYA', 'Service', 'AD', '110099', 'J.Wandeto', 'Quotation', 'Dapny limited', 'INV-00834', ''),
-(10, '1969-12-31', 'TestData', 'pcs', 5, 4000, 20000, '500417', 'MURANYA', 'Service', 'AD', '110099', 'J.Wandeto', 'Quotation', 'Dapny limited', 'INV-00834', '');
 
 -- --------------------------------------------------------
 
